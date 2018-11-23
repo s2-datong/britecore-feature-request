@@ -1,5 +1,5 @@
 from flask_restful import Resource, abort, reqparse
-from app import db
+from db import db
 
 class UserResource(Resource):
 	def post(self):
@@ -18,6 +18,8 @@ class FeatureRequestResource(Resource):
 
 	def put(self, id):
 		''' UPDATE FEATURE REQUEST '''
+		pass
 
 	def delete(self, id):
 		''' DELETE FEATURE REQUEST '''
+		pass
