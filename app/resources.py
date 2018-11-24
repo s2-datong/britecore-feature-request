@@ -1,7 +1,7 @@
 import uuid
 from flask_restful import Resource, reqparse, inputs
 from datetime import datetime
-import models
+from models import User, FeatureRequest, db
 
 class UserResource(Resource):
 	def post(self):
@@ -14,7 +14,7 @@ class UserResource(Resource):
 		if user is None:
 			return {"status": 401, "message": "Invalid Username/Password Supplied"}
 
-		user.session_token = uuid.uuid4()
+		user.session_token = str(uuid.uuid4())
 		db.session.commit()
 
 		return {"status": 200, "message": "login successful", "token": user.session_token}
@@ -56,10 +56,29 @@ class FeatureRequestResource(Resource):
 
 		if id is not None:
 			request = FeatureRequest.query.get(id)
-			return request
+			feature = {
+				"title" : request.title,
+				"description" : request.description,
+				"client" : request.client,
+				"priority" : request.priority,
+				"target_date" : request.target_date.__str__(),
+				"product_area" : request.product_area
+			}
+			return feature
 
 		requests = FeatureRequest.query.all()
-		return requests
+		result = []
+		for request in requests:
+			feature = {
+				"title" : request.title,
+				"description" : request.description,
+				"client" : request.client,
+				"priority" : request.priority,
+				"target_date" : request.target_date.__str__(),
+				"product_area" : request.product_area
+			}
+			result.append(feature)
+		return result
 
 	def put(self, id):
 		''' UPDATE FEATURE REQUEST '''
@@ -126,16 +145,23 @@ class LookUpPriorityResource(Resource):
 		''' Get All client requests'''
 		ids = []
 		requests = FeatureRequest.query.filter_by(client = client ).all()
-		for request in requests.iteritems():
+		if len(requests) is 0:
+			return [1, 2, 3, 4, 5]
+
+		for request in requests:
 			ids.append(request.priority)
 
 		returnIds = []
 		index = 1
 		'''Build a priority selection of 5 digits apart from already chosen priority'''
 		while len(returnIds) < 5:
-			if index not in returnIds:
+			if index not in ids:
 				returnIds.append(index)
 
 			index += 1
 
 		return returnIds
+
+class LookUpProductAreas(Resource):
+	def get(self):
+		return [ 'Policies', 'Billing', 'Claims', 'Reports' ]

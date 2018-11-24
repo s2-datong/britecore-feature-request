@@ -18,5 +18,5 @@ class FeatureRequest(db.Model):
     description = db.Column(db.String(500))
     client = db.Column(db.String(20))
     priority = db.Column(db.Integer)
-    target_date = db.DateTime
+    target_date = db.Column(db.DateTime)
     product_area = db.Column(db.String(20))
