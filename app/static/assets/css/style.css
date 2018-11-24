@@ -54,6 +54,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: rgb(69,64,144);
+    background: linear-gradient(19deg, rgba(69,64,144,1) 12%, rgba(88,15,131,1) 51%, rgba(0,212,255,1) 100%);
 }
 
 .top-buttons{
@@ -62,4 +64,12 @@ body {
     align-items: stretch;
     align-content: space-between;
     padding: 1em;
+}
+
+.login-form{
+    width: 400px;
+    height: 400px;
+    padding: 30px;
+    border-radius: 20px;
+    background-color: #fff;
 }
