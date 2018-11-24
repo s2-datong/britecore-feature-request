@@ -1,8 +1,118 @@
 <html>
 <head>
 	<title>Feature Request</title>
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-	<h1>Hello World</h1>
+	<div id="container">
+		<div class="screen center" id="login">
+			<div class="all-center">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3 class="text-center">LOGIN</h3>
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Username" id="username" />
+							</div>
+							<div class="form-group">
+								<input type="password" class="form-control" placeholder="Password" id="password" />
+							</div>
+							<button class="btn btn-primary login">LOGIN</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="screen left" id="feature">
+			<div class="container">
+				<div class="row">
+					<div class="col-12" style="padding: 20px">
+						<div class="top-buttons">
+							<button class="btn btn-primary" data-toggle="modal" data-target="#feature-request-modal">
+								Add A New Feature Request
+							</button>
+							<button class="btn btn-warning logout">LOGOUT</button>
+						</div>
+						<div id="featureRequests">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/api.js"></script>
+	<script src="assets/js/app.js"></script>
+	<script>
+		let app = new App()
+		$(document).ready(() => {
+			let token = localStorage.getItem('token')
+			if(token != null){
+				app.slideleft('feature')
+				app.init()
+			}
+			document.querySelector('.btn.login').addEventListener('click', () => {
+				app.login()
+			})
+			document.querySelector('.btn.newfeature').addEventListener('click', () => {
+				app.addFeatureRequest()
+			})
+			document.querySelector('.btn.logout').addEventListener('click', () => {
+				app.logout()
+			})
+			$('#client').on('change', () => {
+				app.lookupPriority();
+			})
+		})
+	</script>
+
+	<!-- 
+							MODAL TO UPLOAD NEW FEATURE REQUESTS
+						-->
+						<div class="modal fade" id="feature-request-modal" tabindex="-1" role="dialog" aria-labelledby="uploadfeaturerequests" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">New Feature Request</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        	<div class="form-group">
+										<input type="text" class="form-control" placeholder="Title" id="title" />
+									</div>
+									<div class="form-group">
+										<textarea class="form-control" placeholder="Description" id="description" ></textarea>
+									</div>
+									<div class="form-group">
+										<label for="client">Select Client</label>
+										<select class="form-control" id="client">
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="client">Select Priority</label>
+										<select class="form-control" id="priority">
+										</select>
+									</div>
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="Date (yyyy-mm-dd)" id="date" />
+									</div>
+									<div class="form-group">
+										<label for="client">Select Product Area</label>
+										<select class="form-control" id="area">
+										</select>
+									</div>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						        <button type="button" class="btn btn-primary newfeature">Save changes</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 </body>
 </html>

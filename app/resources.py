@@ -57,6 +57,7 @@ class FeatureRequestResource(Resource):
 		if id is not None:
 			request = FeatureRequest.query.get(id)
 			feature = {
+				"id": request.id,
 				"title" : request.title,
 				"description" : request.description,
 				"client" : request.client,
@@ -70,6 +71,7 @@ class FeatureRequestResource(Resource):
 		result = []
 		for request in requests:
 			feature = {
+				"id": request.id,
 				"title" : request.title,
 				"description" : request.description,
 				"client" : request.client,
