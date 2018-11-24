@@ -8,6 +8,7 @@ class User(db.Model):
     lastname = db.Column(db.String(60))
     username = db.Column(db.String(50))
     password = db.Column(db.String(100))
+    session_token = db.Column(db.String(50))
 
 class FeatureRequest(db.Model):
     __tablename__ = 'feature_requests'
