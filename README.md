@@ -16,8 +16,8 @@ Run the following commands in your terminal
 
 ## Database
 Create a database in mysql
-mysql> CREATE DATABASE britecore;
-mysql> exit;
+- mysql> CREATE DATABASE britecore;
+- mysql> exit;
 
 ## Config
 Update the database configuration string in app/Config.py
@@ -27,7 +27,7 @@ SQLALCHEMY_DATABASE_URI = "Your connection string"
 In your terminal
 - cd app
 - python manage.py db init
-- python manage,py db migrate
+- python manage.py db migrate
 - python manage.py db upgrade
 
 ## Seeding Data
