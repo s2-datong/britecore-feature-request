@@ -1,9 +1,9 @@
 ## Requirements
-Ubuntu
-Python 2.7
-MySQL Server
-pip
-Virtualenv
+- Ubuntu
+- Python 2.7
+- MySQL Server
+- pip
+- Virtualenv
 
 ## How To Setup
 Run the following commands in your terminal
@@ -32,12 +32,12 @@ In your terminal
 
 ## Seeding Data
 The users table created from the migrations is empty. Seed it with data in order to be able to login. The assumption is that staff should already have an account.
-mysql > use britecore;
-mysql > INSERT INTO users(firstname, lastname, username, password) VALUES('Test', 'User', 'testuser', 'password');
-mysql > exit;
+- mysql > use britecore;
+- mysql > INSERT INTO users(firstname, lastname, username, password) VALUES('Test', 'User', 'testuser', 'password');
+- mysql > exit;
 
 ## Running Test Server
 cd into app directory
 - python app.py
-This would start the development server
-In your browser http://localhost:5000
+- This would start the development server 
+- In your browser type http://localhost:5000
