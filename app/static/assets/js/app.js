@@ -58,45 +58,37 @@ class App{
 
 	logout(){
 		this.slideright('login')
-	}
+	} 
 
 	async listFeatureRequests(){
 		try{
 			let featureRequests = await this.api.getFeatureRequests()
 			
 			if(featureRequests.length > 0){
-				let html = `
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Title</th>
-								<th>Description</th>
-								<th>Client</th>
-								<th>Priority</th>
-								<th>Target Date</th>
-								<th>Product Area</th>
-								<th> Action </th>
-							</tr>
-						</thead>
-						<tbody>
-				`
+				let html = ""
 				featureRequests.forEach((request) => {
 					let entry = `
-						<tr>
-							<td> <h5>${request.title}</h5> </td>
-							<td> <pre>${request.description}</pre> </td>
-							<td> ${request.client} </td>
-							<td> ${request.priority} </td>
-							<td> ${request.target_date} </td>
-							<td> ${request.product_area} </td>
-							<td> <a href="#" onclick="app.deleteFeatureRequest(${request.id}, '${request.title}')">
+					<div class="col-md-3">
+						<div class="card">
+						  <div class="card-body">
+						    <h5 class="card-title">${request.title}</h5>
+						    <p class="card-text">${request.description}</p>
+						    <ul class="list-group list-group-flush">
+							    <li class="list-group-item">Client: ${request.client} </li>
+							    <li class="list-group-item">Priority: ${request.priority} </li>
+							    <li class="list-group-item">Target Date: ${request.target_date} </li>
+							    <li class="list-group-item">Product Area: ${request.product_area} </li>
+							</ul>
+						    <a href="#" class="card-link" onclick="app.deleteFeatureRequest(${request.id}, '${request.title}')">
 									Delete Request</a> </td>
-						</tr>
+						  </div>
+						</div>
+					</div>
 					`
 					html += entry
 				})
 
-				html += "</tbody></table>"
+				
 				document.querySelector("#featureRequests").innerHTML = html
 			}
 		}catch(e){

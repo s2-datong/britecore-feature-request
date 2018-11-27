@@ -25,3 +25,8 @@ api.add_resource(LookUpProductAreas, '/product_areas')
 
 if __name__ == '__main__':
     app.run(debug=True)
+    
+    ''' 
+    	Allow Remote connections and listen on port 80. Need to run with sudo 
+    	app.run(host='0.0.0.0', port=80)
+    '''
